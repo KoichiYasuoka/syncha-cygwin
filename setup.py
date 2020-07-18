@@ -19,7 +19,7 @@ for d in glob.glob("syncha/dat/model/*"):
 
 setuptools.setup(
   name="syncha-cygwin",
-  version="0.2.0",
+  version="0.2.1",
   packages=setuptools.find_packages(),
   data_files=data_files,
   install_requires=install_requires
