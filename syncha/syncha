@@ -16,7 +16,7 @@ syncha [args] [file..]
 -O 0: cabocha format (default)
 
 -n #num: extract candidates in preceding #num sentences for zero anaphora resolution
-         (defoult: -n 2)
+         (default: -n 2)
 -c #num: cache size on NP corefrence resolution
          (default: -n 7)
 USG
