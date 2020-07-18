@@ -3,10 +3,10 @@ import glob
 import platform
 if platform.system().startswith("CYGWIN"):
   if platform.machine()=="x86_64":
-    data_files=[("local/bin",glob.glob("bin64/*")+glob.glob("bin/*"))]
+    data_files=[("local/bin",glob.glob("bin64/*"))]
     install_requires=["cabocha-cygwin64@git+https://github.com/KoichiYasuoka/cabocha-cygwin64"]
   else:
-    data_files=[("local/bin",glob.glob("bin32/*")+glob.glob("bin/*"))]
+    data_files=[("local/bin",glob.glob("bin32/*"))]
     install_requires=["cabocha-cygwin32@git+https://github.com/KoichiYasuoka/cabocha-cygwin32"]
 else:
   raise OSError("syncha-cygwin only for Cygwin")
@@ -19,7 +19,7 @@ for d in glob.glob("syncha/dat/model/*"):
 
 setuptools.setup(
   name="syncha-cygwin",
-  version="0.2.1",
+  version="0.2.2",
   packages=setuptools.find_packages(),
   data_files=data_files,
   install_requires=install_requires
