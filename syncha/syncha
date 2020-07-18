@@ -18,7 +18,7 @@ syncha [args] [file..]
 -n #num: extract candidates in preceding #num sentences for zero anaphora resolution
          (default: -n 2)
 -c #num: cache size on NP corefrence resolution
-         (default: -n 7)
+         (default: -c 7)
 USG
 
 my %options;
