@@ -1,1 +1,2 @@
+#! /bin/sh
 exec `echo $0 | sed 's?/bin/\([^/]*\)$?/syncha/\1?'` "$@"
