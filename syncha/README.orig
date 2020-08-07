@@ -1,0 +1,95 @@
+  SynCha ver.0.3.1.1
+  (c) Ryu Iida 2011-2015
+
+== はじめに =======================================================
+
+- SynChaは述語，事態性名詞の項構造解析を行うツールです．便宜上，同じ名
+  前を付けていますが，http://cl.naist.jp/syncha/のデモで動かしているも
+  のとはまったくの別物です．
+
+== 更新履歴 =======================================================
+
+- v0.3.1 cabochaの-nオプションがいつの間にか0(固有名詞解析を行わない)が
+  デフォルトになっていたため，-n 1で動かすように修正．
+
+- v0.3 名詞句の共参照解析の処理を追加．共参照解析ではキャッシュモデルを
+  利用して，先行詞の候補数を減らした上で解析する．
+
+- v0.2.2 入出力をeuc-jpからutf8に変更．
+  空行を入力した際にエラーが出るバグを修正
+
+- v0.2.1 半角文字列に関するおかしな振舞いを修正
+
+- v0.2 解析対象をn文前までに変更．nはオプションで変えられるはず．
+  基本的にnを大きくすると解析が非常に遅くなります．
+  (default: n = 2)
+
+- v0.1a とりあえず作る．解析対象は文内のみ．
+
+== 使い方 =======================================================
+
+1. cabocha 0.53がインストールされており，パスが通っているかを確認．
+
+2. syncha-0.3.1.tgz を展開，
+   http://sourceforge.net/projects/lpsolve/ からlp_solveを
+   持ってきて，インストール
+
+3.1 cabocha と同様に平文を入力とする
+% syncha < raw_file > out_file
+
+  - 1ファイルに複数の文章を記述する場合のデリミタは"EOT\n"．
+    具体例は dat/sample/ の中身を見てください．
+
+  出力結果はcabochaの出力に加えて，該当する形態素に属性が付与されます．
+
+  - type="(pred|noun)": この形態素が述語もしくは事態性名詞であることを
+    表します．
+
+  - (ga|o|ni)="\d+" と id="\d+": gaとidが同じ数値の場合，gaを持つ述語
+    (もしくは事態性名詞)がidを持つ形態素をガ格としてとることを表します．
+    また同様に，o，niの場合はそれぞれヲ格，ニ格を表します．
+
+  - eq="\d+"が同じ数値の場合，その形態素を主辞とする名詞句の間に共参照
+    の関係が成り立つことを表します．
+
+3.2 cabocha の出力結果を入力として解析する
+% syncha -I 1 < cab_file > out_file
+
+  
+== TODO ===========================================================
+
+- ゼロ照応解析については，格フレームを使った精密な先行詞候補のフィルタ
+  リング．
+
+- 出現傾向の異なる問題の種類ごとにモデルを作成し，適用．
+
+- 述語項構造解析についても，キャッシュモデル (Iida et al. 2009)を利用し
+  た先行詞候補のフィルタリングを行い，より前方文脈へのアクセスを容易に
+  する．
+
+== ライセンス =====================================================
+
+- LGPL
+
+== 参考/関連文献 ==================================================
+
+- Ryu Iida, Massimo Poesio. A Cross-Lingual ILP Solution to Zero
+  Anaphora Resolution. The 49th Annual Meeting of the Association for
+  Computational Linguistics: Human Language Technologies (ACL-HLT
+  2011), pp. 804-813. 2011.
+  
+- Ryu Iida, Kentaro Inui and Yuji Matsumoto. Capturing Salience with a
+  Trainable Cache Model for Zero-anaphora Resolution. The Joint
+  Conference of the 47th Annual Meeting of the Association for
+  Computational Linguistics and the 4th International Joint Conference
+  on Natural Language Processing (ACL-IJCNLP 2009), pp. 647-655. 2009.
+  
+- 飯田龍, 小町守, 井之上直也, 乾健太郎, 松本裕治. 述語項構造と照応関係
+  のアノテーション: NAISTテキストコーパス構築の経験から. 自然言語処理,
+  Vol.17, No.2, pp.25-50, April 2010.
+
+- 飯田龍, 乾健太郎, 松本裕治. 文脈的手がかりを考慮した機械学習による日
+  本語ゼロ代名詞の先行詞同定. 情報処理学会論文誌, Vol 45, No. 3,
+  pp.906-918, 2004.
+
+
